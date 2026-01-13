@@ -1,0 +1,50 @@
+# =====================
+# Python
+# =====================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+
+# =====================
+# Virtual environments
+# =====================
+venv/
+.env/
+.envrc/
+
+# =====================
+# MediaPipe / ML caches
+# =====================
+.cache/
+.mediapipe/
+*.tflite
+*.onnx
+
+# =====================
+# OS junk
+# =====================
+.DS_Store
+Thumbs.db
+
+# =====================
+# Editor / IDE
+# =====================
+.vscode/
+.idea/
+
+# =====================
+# Outputs (generated)
+# =====================
+output/
+logs/
+*.log
+
+# =====================
+# Large data (keep raw videos if you want)
+# =====================
+data/processed/
+data/tmp/
