@@ -2,7 +2,7 @@ import cv2
 import mediapipe as mp
 from pathlib import Path
 
-VIDEO_PATH = Path("raw_videos/feies.mov")
+VIDEO_PATH = Path("data/raw/feies.mov")
 
 mp_pose = mp.solutions.pose
 

@@ -11,7 +11,7 @@ args = parser.parse_args()
 SERVE_ID = args.serve
 
 # -------- Paths --------
-VIDEO_PATH = Path("raw_videos/feies.mov")
+VIDEO_PATH = Path("data/raw/feies.mov")
 OUTPUT_CSV = Path("output/pose_videos/feies_right_arm.csv")
 OUTPUT_CSV.parent.mkdir(parents=True, exist_ok=True)
 # -----------------------

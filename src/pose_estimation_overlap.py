@@ -2,7 +2,7 @@ import cv2
 import mediapipe as mp
 
 # -------- CONFIG --------
-INPUT_VIDEO = "raw_videos/feies.mov"
+INPUT_VIDEO = "data/raw/feies.mov"
 OUTPUT_VIDEO = "serve1_pose.mp4"
 # ------------------------
 
