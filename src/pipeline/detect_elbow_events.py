@@ -1,8 +1,16 @@
 import csv
 from pathlib import Path
+import argparse
 
-INPUT_CSV = Path("data/processed/csv/serve1_elbow_angle_smoothed.csv")
-OUTPUT_CSV = Path("data/processed/csv/serve1_elbow_events.csv")
+parser = argparse.ArgumentParser()
+parser.add_argument("--serve", required=True)
+args = parser.parse_args()
+
+SERVE_ID = args.serve
+SERVE_NAME = Path(SERVE_ID).stem
+
+INPUT_CSV = Path(f"data/processed/csv/{SERVE_NAME}_elbow_angle_smoothed.csv")
+OUTPUT_CSV = Path(f"data/processed/csv/{SERVE_NAME}_elbow_events.csv")
 
 frames = []
 angles = []

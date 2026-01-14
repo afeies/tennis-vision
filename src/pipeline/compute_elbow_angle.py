@@ -8,9 +8,10 @@ parser.add_argument("--serve", required=True)
 args = parser.parse_args()
 
 SERVE_ID = args.serve
+SERVE_NAME = Path(SERVE_ID).stem
 
-INPUT_CSV = Path("data/processed/csv/feies_right_arm.csv")
-OUTPUT_CSV = Path("data/processed/csv/serve1_elbow_angle.csv")
+INPUT_CSV = Path(f"data/processed/csv/{SERVE_NAME}_right_arm.csv")
+OUTPUT_CSV = Path(f"data/processed/csv/{SERVE_NAME}_elbow_angle.csv")
 
 # compute angle at point b (in degrees) given points a-b-c
 def angle_between(a, b, c):

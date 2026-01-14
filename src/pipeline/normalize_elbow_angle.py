@@ -1,10 +1,18 @@
 import csv
 from pathlib import Path
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--serve", required=True)
+args = parser.parse_args()
+
+SERVE_ID = args.serve
+SERVE_NAME = Path(SERVE_ID).stem
 
 # Paths
-ANGLE_CSV = Path("data/processed/csv/serve1_elbow_angle_smoothed.csv")
-EVENT_CSV = Path("data/processed/csv/serve1_elbow_events.csv")
-OUTPUT_CSV = Path("data/processed/csv/serve1_elbow_angle_normalized.csv")
+ANGLE_CSV = Path(f"data/processed/csv/{SERVE_NAME}_elbow_angle_smoothed.csv")
+EVENT_CSV = Path(f"data/processed/csv/{SERVE_NAME}_elbow_events.csv")
+OUTPUT_CSV = Path(f"data/processed/csv/{SERVE_NAME}_elbow_angle_normalized.csv")
 
 # Read smoothed elbow angles
 frames = []
@@ -28,7 +36,6 @@ with open(EVENT_CSV, "r") as f:
 start_frame = event_frames["max_flexion"]
 # contact
 end_frame = event_frames["max_extension"]
-print(start_frame, end_frame)
 
 if start_frame >= end_frame:
     raise ValueError("Invalid event ordering for normalization")

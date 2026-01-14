@@ -9,10 +9,11 @@ parser.add_argument("--serve", required=True)
 args = parser.parse_args()
 
 SERVE_ID = args.serve
+SERVE_NAME = Path(SERVE_ID).stem
 
 # -------- Paths --------
-VIDEO_PATH = Path("data/raw/feies.mov")
-OUTPUT_CSV = Path("data/processed/csv/feies_right_arm.csv")
+VIDEO_PATH = Path(f"data/raw/{SERVE_ID}")
+OUTPUT_CSV = Path(f"data/processed/csv/{SERVE_NAME}_right_arm.csv")
 OUTPUT_CSV.parent.mkdir(parents=True, exist_ok=True)
 # -----------------------
 
