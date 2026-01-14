@@ -28,4 +28,4 @@ for serve in SERVES:
             check=True
         )
 
-print("\nALl serves processed successfully")
+print("\nAll serves processed successfully")
