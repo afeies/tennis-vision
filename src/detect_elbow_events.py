@@ -1,8 +1,8 @@
 import csv
 from pathlib import Path
 
-INPUT_CSV = Path("output/pose_videos/serve1_elbow_angle_smoothed.csv")
-OUTPUT_CSV = Path("output/pose_videos/serve1_elbow_events.csv")
+INPUT_CSV = Path("data/processed/csv/serve1_elbow_angle_smoothed.csv")
+OUTPUT_CSV = Path("data/processed/csv/serve1_elbow_events.csv")
 
 frames = []
 angles = []

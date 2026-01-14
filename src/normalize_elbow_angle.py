@@ -2,9 +2,9 @@ import csv
 from pathlib import Path
 
 # Paths
-ANGLE_CSV = Path("output/pose_videos/serve1_elbow_angle_smoothed.csv")
-EVENT_CSV = Path("output/pose_videos/serve1_elbow_events.csv")
-OUTPUT_CSV = Path("output/pose_videos/serve1_elbow_angle_normalized.csv")
+ANGLE_CSV = Path("data/processed/csv/serve1_elbow_angle_smoothed.csv")
+EVENT_CSV = Path("data/processed/csv/serve1_elbow_events.csv")
+OUTPUT_CSV = Path("data/processed/csv/serve1_elbow_angle_normalized.csv")
 
 # Read smoothed elbow angles
 frames = []

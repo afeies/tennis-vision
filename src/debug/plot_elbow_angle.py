@@ -2,7 +2,7 @@ import csv
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-CSV_PATH = Path("output/pose_videos/serve1_elbow_angle_smoothed.csv")
+CSV_PATH = Path("data/processed/csv/serve1_elbow_angle_smoothed.csv")
 
 frames = []
 angles = []

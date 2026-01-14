@@ -8,8 +8,8 @@ args = parser.parse_args()
 
 SERVE_ID = args.serve
 
-INPUT_CSV = Path("output/pose_videos/serve1_elbow_angle.csv")
-OUTPUT_CSV = Path("output/pose_videos/serve1_elbow_angle_smoothed.csv")
+INPUT_CSV = Path("data/processed/csv/serve1_elbow_angle.csv")
+OUTPUT_CSV = Path("data/processed/csv/serve1_elbow_angle_smoothed.csv")
 
 # small window for minimal distortion
 WINDOW_SIZE = 5
