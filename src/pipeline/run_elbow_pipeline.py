@@ -21,7 +21,7 @@ for serve in SERVES:
         subprocess.run(
             [
                 "python3",
-                f"src/{script}",
+                f"src/pipeline/{script}",
                 "--serve",
                 serve
             ],
