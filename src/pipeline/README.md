@@ -2,7 +2,7 @@
 This folder contains scripts that run multiple processing steps in sequence for one or more serve videos
 
 ### `run_elbow_pipeline.py`
-- Runs the full elbow-angle processing pipeline for all serve videos found in `raw_videos`
+- Runs the full elbow-angle processing pipeline for all serve videos found in `data/raw`
 - For each serve video, this script executes the following
 1. extract right arm joint coordinates
 2. compute elbow angle over time
