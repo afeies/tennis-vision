@@ -21,28 +21,56 @@ def load_serve_data(serve_name):
             angles.append(float(row["elbow_angle_deg_smoothed"]))
     return frames, angles
 
-plt.figure(figsize=(10, 4))
+fig, ax = plt.subplots(figsize=(10, 4))
+lines = []
+original_linewidths = []
 
 if args.all:
     for serve in SERVES:
         try:
             frames, angles = load_serve_data(serve)
-            plt.plot(frames, angles, label=serve)
+            line, = ax.plot(frames, angles, label=serve, linewidth=1.5)
+            lines.append(line)
+            original_linewidths.append(1.5)
         except FileNotFoundError:
             print(f"Warning: {serve} data not found, skipping")
-    plt.legend()
-    plt.title("Elbow Angle Over Time - All Serves")
+    ax.legend()
+    ax.set_title("Elbow Angle Over Time - All Serves")
+
+    def on_hover(event):
+        if event.inaxes != ax:
+            return
+        for i, line in enumerate(lines):
+            if line.contains(event)[0]:
+                # Highlight hovered line
+                for j, other_line in enumerate(lines):
+                    if j == i:
+                        other_line.set_linewidth(3.5)
+                        other_line.set_alpha(1.0)
+                    else:
+                        other_line.set_linewidth(1.0)
+                        other_line.set_alpha(0.3)
+                fig.canvas.draw_idle()
+                return
+        # Reset all lines if not hovering over any
+        for j, line in enumerate(lines):
+            line.set_linewidth(original_linewidths[j])
+            line.set_alpha(1.0)
+        fig.canvas.draw_idle()
+
+    fig.canvas.mpl_connect('motion_notify_event', on_hover)
+
 elif args.serve:
     serve_name = Path(args.serve).stem
     frames, angles = load_serve_data(serve_name)
-    plt.plot(frames, angles)
-    plt.title(f"Elbow Angle Over Time - {serve_name}")
+    ax.plot(frames, angles)
+    ax.set_title(f"Elbow Angle Over Time - {serve_name}")
 else:
     print("Usage: python plot_elbow_angle.py --serve feies.mov")
     print("       python plot_elbow_angle.py --all")
     exit(1)
 
-plt.xlabel("Frame")
-plt.ylabel("Elbow Angle (deg)")
-plt.grid(True)
+ax.set_xlabel("Frame")
+ax.set_ylabel("Elbow Angle (deg)")
+ax.grid(True)
 plt.show()
