@@ -17,5 +17,8 @@ Interactive video viewer for pose debugging
 - n: advance one frame
 - q: quit
 
+## `plot_elbow_angle.py`
+Plots the smoothed elbow angle over time for a single serve
+
 ### Run
 `python src/debug/view_pose_frame_by_frame.py`
