@@ -21,6 +21,18 @@ def load_serve_data(serve_name):
             angles.append(float(row["elbow_angle_deg_smoothed"]))
     return frames, angles
 
+def load_events(serve_name):
+    csv_path = Path(f"data/processed/csv/{serve_name}_elbow_events.csv")
+    events = {}
+    try:
+        with open(csv_path, "r") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                events[row["event"]] = int(row["frame"])
+    except FileNotFoundError:
+        pass
+    return events
+
 fig, ax = plt.subplots(figsize=(10, 4))
 lines = []
 original_linewidths = []
@@ -29,9 +41,18 @@ if args.all:
     for serve in SERVES:
         try:
             frames, angles = load_serve_data(serve)
+            events = load_events(serve)
+
             line, = ax.plot(frames, angles, label=serve, linewidth=1.5)
             lines.append(line)
             original_linewidths.append(1.5)
+
+            # Plot event markers with lighter style for --all view
+            if "racquet_drop" in events:
+                ax.axvline(events["racquet_drop"], color='red', linestyle=':', alpha=0.3, linewidth=1)
+            if "contact" in events:
+                ax.axvline(events["contact"], color='green', linestyle=':', alpha=0.3, linewidth=1)
+
         except FileNotFoundError:
             print(f"Warning: {serve} data not found, skipping")
     ax.legend()
@@ -63,7 +84,17 @@ if args.all:
 elif args.serve:
     serve_name = Path(args.serve).stem
     frames, angles = load_serve_data(serve_name)
-    ax.plot(frames, angles)
+    events = load_events(serve_name)
+
+    ax.plot(frames, angles, label="Elbow angle")
+
+    # Plot event markers
+    if "racquet_drop" in events:
+        ax.axvline(events["racquet_drop"], color='red', linestyle='--', linewidth=2, label='Racquet drop')
+    if "contact" in events:
+        ax.axvline(events["contact"], color='green', linestyle='--', linewidth=2, label='Contact')
+
+    ax.legend()
     ax.set_title(f"Elbow Angle Over Time - {serve_name}")
 else:
     print("Usage: python plot_elbow_angle.py --serve feies.mov")

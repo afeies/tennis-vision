@@ -12,6 +12,8 @@ SCRIPTS = [
     "extract_arm_timeseries.py",
     "compute_elbow_angle.py",
     "smooth_elbow_angle.py",
+    "detect_elbow_events.py",
+    "normalize_elbow_angle.py",
 ]
 
 for serve in SERVES:

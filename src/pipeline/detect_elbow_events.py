@@ -21,16 +21,16 @@ with open(INPUT_CSV, "r") as f:
         frames.append(int(row["frame"]))
         angles.append(float(row["elbow_angle_deg_smoothed"]))
 
-# find key events
-min_angle = min(angles)
-max_angle = max(angles)
+# find key events using angle extrema
+# racquet drop: minimum elbow angle (maximum flexion)
+min_idx = angles.index(min(angles))
 
-min_idx = angles.index(min_angle)
-max_idx = angles.index(max_angle)
+# contact: maximum elbow angle (maximum extension) after racquet drop
+max_idx = min_idx + angles[min_idx:].index(max(angles[min_idx:]))
 
 events = [
-    ("max_flexion", frames[min_idx], min_angle),
-    ("max_extension", frames[max_idx], max_angle)
+    ("racquet_drop", frames[min_idx], angles[min_idx]),
+    ("contact", frames[max_idx], angles[max_idx])
 ]
 
 with open(OUTPUT_CSV, "w", newline="") as f:

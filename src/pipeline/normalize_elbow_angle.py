@@ -33,9 +33,9 @@ with open(EVENT_CSV, "r") as f:
         event_frames[row["event"]] = int(row["frame"])
 
 # racquet drop
-start_frame = event_frames["max_flexion"]
+start_frame = event_frames["racquet_drop"]
 # contact
-end_frame = event_frames["max_extension"]
+end_frame = event_frames["contact"]
 
 if start_frame >= end_frame:
     raise ValueError("Invalid event ordering for normalization")
