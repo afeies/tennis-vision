@@ -20,6 +20,24 @@ python src/visualization/plot_elbow_angle.py --all              # Compare all se
 - Multi-serve overlay with hover interaction
 - Frame-by-frame timeline
 
+### `plot_shoulder_angle.py`
+**Purpose**: Visualize shoulder angle changes (upper arm abduction relative to torso)
+
+**Usage**:
+```bash
+python src/visualization/plot_shoulder_angle.py --serve feies.mov  # Single serve
+python src/visualization/plot_shoulder_angle.py --all              # Compare all serves
+```
+
+### `plot_knee_angle.py`
+**Purpose**: Visualize knee flexion/extension for leg drive analysis
+
+**Usage**:
+```bash
+python src/visualization/plot_knee_angle.py --serve feies.mov  # Single serve
+python src/visualization/plot_knee_angle.py --all              # Compare all serves
+```
+
 ---
 
 ## Planned Visualizations
