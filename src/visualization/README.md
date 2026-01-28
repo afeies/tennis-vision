@@ -38,6 +38,15 @@ python src/visualization/plot_knee_angle.py --serve feies.mov  # Single serve
 python src/visualization/plot_knee_angle.py --all              # Compare all serves
 ```
 
+### `plot_hip_angle.py`
+**Purpose**: Visualize hip flexion/extension and torso positioning
+
+**Usage**:
+```bash
+python src/visualization/plot_hip_angle.py --serve feies.mov  # Single serve
+python src/visualization/plot_hip_angle.py --all              # Compare all serves
+```
+
 ---
 
 ## Planned Visualizations
