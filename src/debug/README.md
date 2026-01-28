@@ -9,13 +9,18 @@ Interactive video viewer for pose debugging
 ### Features
 - pause / resume playback
 - step through video frame-by-frame
+- timeline scrubber for jumping to any frame
 - overlay pose landmarks
 - display joint statistics on screen
 
 ### Controls
 - space: play / pause
-- n: advance one frame
-- q: quit
+- >: next frame
+- <: previous frame
+- timeline slider: drag to jump to any frame
+- q: quit and close window
+
+**Note**: Press 'q' to exit the viewer and close the video window.
 
 ## `plot_elbow_angle.py`
 Plots the smoothed elbow angle over time for a single serve

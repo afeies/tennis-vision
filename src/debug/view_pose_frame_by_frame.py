@@ -11,6 +11,13 @@ cap = cv2.VideoCapture(str(VIDEO_PATH))
 
 paused = True
 frame_idx = 0
+total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+
+# Callback for timeline trackbar
+def on_trackbar(val):
+    global frame_idx, paused
+    frame_idx = val
+    paused = True
 
 with mp_pose.Pose(
     static_image_mode=False,
@@ -18,19 +25,17 @@ with mp_pose.Pose(
     min_detection_confidence=0.5,
     min_tracking_confidence=0.5
 ) as pose:
-    
+
+    # Create window and timeline trackbar
+    cv2.namedWindow("Pose Debug Viewer")
+    cv2.createTrackbar("Frame", "Pose Debug Viewer", 0, total_frames - 1, on_trackbar)
+
     while cap.isOpened():
-        if not paused:
-            ret, frame = cap.read()
-            if not ret:
-                break
-            frame_idx += 1
-        else:
-            # If paused, don't advance frame
-            ret, frame = cap.read()
-            if not ret:
-                break
-            cap.set(cv2.CAP_PROP_POS_FRAMES, frame_idx)
+        # Set frame position and read
+        cap.set(cv2.CAP_PROP_POS_FRAMES, frame_idx)
+        ret, frame = cap.read()
+        if not ret:
+            break
         
         rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         results = pose.process(rgb)
@@ -69,17 +74,27 @@ with mp_pose.Pose(
             )
         
         cv2.imshow("Pose Debug Viewer", frame)
-        
-        key = cv2.waitKey(0 if paused else 30)
-        
+
+        # Update trackbar position
+        cv2.setTrackbarPos("Frame", "Pose Debug Viewer", frame_idx)
+
+        # Use short wait even when paused to respond to trackbar changes
+        key = cv2.waitKey(1 if paused else 30)
+
         if key == ord('q'):
             break
         elif key == ord(' '):       # space = toggle pause
             paused = not paused
-        elif key == ord('n'):       # n = next frame
+        elif key in [83, 3, 2555904]:  # right arrow = next frame
             paused = True
-            frame_idx += 1
-            cap.set(cv2.CAP_PROP_POS_FRAMES, frame_idx)
+            frame_idx = min(total_frames - 1, frame_idx + 1)
+        elif key in [81, 2, 2424832]:  # left arrow = previous frame
+            paused = True
+            frame_idx = max(0, frame_idx - 1)
+
+        # Auto-advance if playing
+        if not paused:
+            frame_idx = min(total_frames - 1, frame_idx + 1)
 
 cap.release()
 cv2.destroyAllWindows()
