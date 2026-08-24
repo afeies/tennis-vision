@@ -36,10 +36,10 @@ with mp_pose.Pose(
         ret, frame = cap.read()
         if not ret:
             break
-        
+
         rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         results = pose.process(rgb)
-        
+
         if results.pose_landmarks:
             lm = results.pose_landmarks.landmark
             shoulder = lm[12]
@@ -51,7 +51,7 @@ with mp_pose.Pose(
                 results.pose_landmarks,
                 mp_pose.POSE_CONNECTIONS
             )
-            
+
             # Overlay stats
             cv2.putText(
                 frame,
@@ -72,7 +72,7 @@ with mp_pose.Pose(
                 (255, 255, 255),
                 2
             )
-        
+
         cv2.imshow("Pose Debug Viewer", frame)
 
         # Update trackbar position

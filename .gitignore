@@ -8,21 +8,43 @@ __pycache__/
 *.so
 *.egg-info/
 .eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
 
 # =====================
 # Virtual environments
 # =====================
 venv/
-.env/
+.venv/
+env/
+ENV/
 .envrc/
 
 # =====================
-# MediaPipe / ML caches
+# Secrets / local config
+# =====================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.claude/settings.local.json
+CLAUDE.md
+
+# =====================
+# MediaPipe / ML caches and models
 # =====================
 .cache/
 .mediapipe/
 *.tflite
 *.onnx
+*.task
+*.pb
+*.h5
 
 # =====================
 # OS junk
@@ -35,16 +57,32 @@ Thumbs.db
 # =====================
 .vscode/
 .idea/
+*.swp
 
 # =====================
 # Outputs (generated)
 # =====================
 output/
+outputs/
 logs/
 *.log
 
 # =====================
-# Large data (keep raw videos if you want)
+# Large data (raw serve videos in data/raw/ are tracked)
 # =====================
 data/processed/
 data/tmp/
+
+# =====================
+# Planning docs (markdown lives in docs/ and plan.md instead)
+# =====================
+*.doc
+*.docx
+*.pdf
+
+# =====================
+# MediaPipe scratch sandbox (keep the scripts + README, drop the media)
+# =====================
+mediapipe-test/data/
+mediapipe-test/models/
+mediapipe-test/outputs/

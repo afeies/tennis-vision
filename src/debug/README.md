@@ -15,8 +15,7 @@ Interactive video viewer for pose debugging
 
 ### Controls
 - space: play / pause
-- >: next frame
-- <: previous frame
+- ← / →: previous / next frame
 - timeline slider: drag to jump to any frame
 - q: quit and close window
 
